@@ -34,11 +34,11 @@ input {
 	}
 	%>
 
-	<c:forEach var="i" begin="1" end="10">
+	<%-- <c:forEach var="i" begin="1" end="10">
 		<h1>
 			<c:out value="${i}" />
 		</h1>
-	</c:forEach>
+	</c:forEach> --%>
 
 </body>
 </html>
