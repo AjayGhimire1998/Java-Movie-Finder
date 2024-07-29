@@ -7,7 +7,7 @@
 <!-- Servlet declaration -->
 <servlet>
 <servlet-name>ListMovies</servlet-name>
-<servlet-class>webapp.MoviesServlet</servlet-class>
+<servlet-class>com.ajayghimire.ListMovies</servlet-class>
 </servlet>
 
 <!-- Servlet mapping -->

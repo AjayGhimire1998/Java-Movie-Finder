@@ -1,4 +1,4 @@
-package webapp;
+package com.ajayghimire;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class ListMovies extends HttpServlet {
     req.setAttribute("movies", movies);
     req.setAttribute("number", movies.size());
     req.getRequestDispatcher(
-        "/Users/ajayghimire/eclipse-workspace/my-web-app/src/main/webapp/moviejsp/movies.jsp")
+        "/Users/ajayghimire/eclipse-workspace/my-web-app/src/main/webapp/ListMovies.jsp")
         .forward(req, resp);
   }
 }

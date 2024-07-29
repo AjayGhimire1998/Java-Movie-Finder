@@ -1,4 +1,4 @@
-package webapp;
+package com.ajayghimire;
 
 public class Movie {
   private String title;
