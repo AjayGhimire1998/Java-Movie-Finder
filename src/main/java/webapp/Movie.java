@@ -1,10 +1,12 @@
+package webapp;
+
 public class Movie {
   private String title;
   private int year;
   private double price;
 
 
-  public Movie(String t, String y, String p) {
+  public Movie(String t, int y, double p) {
     this.title = t;
     this.year = y;
     this.price = p;
