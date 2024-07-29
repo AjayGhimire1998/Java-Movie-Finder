@@ -10,8 +10,8 @@
 </head>
 <body>
 	<%
-	ArrayList<Movie> movies = request.getAttribute("movies");
-	out.println(moviesSize);
+	Object movies = request.getAttribute("movies");
+	out.println(movies);
 	%>
 
 	<h3>moviesshowing..</h3>

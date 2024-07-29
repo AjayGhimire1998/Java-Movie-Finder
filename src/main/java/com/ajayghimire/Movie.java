@@ -35,4 +35,11 @@ public class Movie {
   public void setPrice(double price) {
     this.price = price;
   }
+
+  @Override
+  public String toString() {
+    return "Movie: " + "[ " + this.getTitle() + ", " + this.getPrice() + ", " + this.getYear()
+        + " ]";
+
+  }
 }
