@@ -34,6 +34,17 @@ public class Triangle {
     } catch (Exception e) {
       this.sideB = 0.0;
     }
+  }
+
+  public String getSideC() {
+    if (this.sideA == 0.0 || this.sideB == 0) {
+      return "Please enter both side";
+    } else {
+      Double sideC;
+      sideC = Math.sqrt((this.sideA * this.sideA) + (this.sideB * this.sideB));
+      return Double.toString(sideC);
+    }
+
 
   }
 
