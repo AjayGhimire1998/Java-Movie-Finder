@@ -21,6 +21,7 @@ public class ListMovie extends HttpServlet {
       throws ServletException, IOException {
     ArrayList<Movie> movies = MovieIO.getMovies();
     request.setAttribute("movies", movies);
+    request.setAttribute("number", movies.size());
     RequestDispatcher dispatcher = request.getRequestDispatcher("ListMovie.jsp");
     dispatcher.forward(request, response);
 
