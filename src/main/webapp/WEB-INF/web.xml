@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="https://jakarta.ee/xml/ns/jakartaee"
-	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
-	id="WebApp_ID" version="5.0">
-<display-name>my-web-app</display-name>
-<!-- Servlet declaration -->
-<servlet>
-<servlet-name>ListMovies</servlet-name>
-<servlet-class>com.ajayghimire.ListMovies</servlet-class>
-</servlet>
-
-<!-- Servlet mapping -->
-<servlet-mapping>
-<servlet-name>ListMovies</servlet-name>
-<url-pattern>/movies</url-pattern>
-</servlet-mapping>
-
-<!-- Welcome file list -->
-<welcome-file-list>
-<welcome-file>index.jsp</welcome-file>
-</welcome-file-list>
-
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd" id="WebApp_ID" version="5.0">
+  <display-name>my-web-app</display-name>
+  <servlet>
+    <servlet-name>ListMovies</servlet-name>
+    <servlet-class>com.ajayghimire.ListMovies</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListMovies</servlet-name>
+    <url-pattern>/movies</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>ListMovie</display-name>
+    <servlet-name>ListMovie</servlet-name>
+    <servlet-class>com.ajayghimire.ListMovie</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListMovie</servlet-name>
+    <url-pattern>/ListMovie</url-pattern>
+  </servlet-mapping>
 </web-app>
