@@ -1,6 +1,8 @@
 package com.ajayghimire.imdbMovies;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,9 +30,9 @@ public class IMDBSavedMoviesServlet extends HttpServlet {
     String title = request.getParameter("title");
 
     IMDBMovieDAO imdbMovieDAO = new IMDBMovieDAO();
-    IMDBMovie movie = imdbMovieDAO.getImdbMovie();
+    List<Map<String, String>> favouriteMovies = imdbMovieDAO.getFavouriteMovies();
     // imdbMovieDAO.getImdbMovie();
-    request.setAttribute("fav", movie);
+    request.setAttribute("fav", favouriteMovies);
 
     request.getRequestDispatcher("favourites.jsp").forward(request, response);
   }

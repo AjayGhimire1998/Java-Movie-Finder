@@ -5,20 +5,24 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class IMDBMovieDAO {
 
+  private Connection getConnection() throws SQLException {
+    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/imdbMovies");
+  }
 
-  public IMDBMovie getImdbMovie() {
+
+
+  public List<Map<String, String>> getFavouriteMovies() {
     IMDBMovie imdbMovie = new IMDBMovie();
+    List<Map<String, String>> favouriteMovies = new ArrayList<>();
 
-
-
-    Connection conn = null;
     try {
-      conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/imdbMovies", "postgres",
-          "Ajay123");
-
+      Connection conn = getConnection();
       Statement st = conn.createStatement();
       ResultSet rs = st.executeQuery("SELECT * FROM movies");
       while (rs.next()) {
@@ -27,27 +31,31 @@ public class IMDBMovieDAO {
         imdbMovie.setPlot(rs.getString("plot"));
         imdbMovie.setGenres(rs.getString("genres"));
         imdbMovie.setRating(rs.getDouble("rating"));
-
+        favouriteMovies.add(imdbMovie.toIMDBMovieMap());
       }
       rs.close();
       st.close();
     } catch (SQLException e) {
-      // TODO Auto-generated catch block
+      System.err.println("Cannot establish connection to DB for getting favourite movies.");
       e.printStackTrace();
     }
 
 
-    // IMDBMovie imdbMovie = new IMDBMovie();
-    // imdbMovie.setTitle("ajay");
-    // imdbMovie.setRating(1.9);
-    // imdbMovie.setYear(2024);
-    // imdbMovie.setPlot("ehhehehaf fasghfjkasgkfa kgfagfs");
-    //
-    if (conn == null) {
-      System.out.println("Connection is not made!");
+    System.out.println(favouriteMovies);
+    return favouriteMovies;
+  }
+
+  public void addToFavourites() {
+    try {
+      Connection conn = getConnection();
+
+
+    } catch (SQLException e) {
+      System.err.println("Cannot establish connection to DB for adding to favourite movies.");
+      e.printStackTrace();
     }
-    System.out.println(imdbMovie);
-    return imdbMovie;
+
+
   }
 
 }

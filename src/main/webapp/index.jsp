@@ -82,7 +82,7 @@ body {
 	width: 70%;
 }
 
-.empty-movie{
+.empty-movie {
 	text-align: center;
 }
 
@@ -183,7 +183,7 @@ body {
 
 	<form action="/movies/favourites" method="get"
 		class="favourites">
-		<input type="submit" value="Favourites"
+		<input type="submit" value="Favourites ➚"
 			class="favourite-submit" />
 	</form>
 	<div class="results">

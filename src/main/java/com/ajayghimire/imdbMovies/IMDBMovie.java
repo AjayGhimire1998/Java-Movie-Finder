@@ -1,5 +1,8 @@
 package com.ajayghimire.imdbMovies;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class IMDBMovie {
   private String title;
   private int year;
@@ -45,6 +48,17 @@ public class IMDBMovie {
 
   public void setPlot(String plot) {
     this.plot = plot;
+  }
+
+  public Map<String, String> toIMDBMovieMap() {
+    Map<String, String> movieMap = new HashMap<>();
+    movieMap.put("title", this.title);
+    movieMap.put("year", Integer.toString(this.year));
+    movieMap.put("rating", Double.toString(this.rating));
+    movieMap.put("genres", this.genres);
+    movieMap.put("plot", this.plot);
+    return movieMap;
+
   }
 
   @Override
