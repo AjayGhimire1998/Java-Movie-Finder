@@ -8,6 +8,9 @@
                         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <dependent-module archiveName="json-20240303.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/ajayghimire/Downloads/json-20240303.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
                         
         
         <property name="java-output-path" value="/my-web-app/build/classes"/>

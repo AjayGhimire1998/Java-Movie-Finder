@@ -31,14 +31,17 @@ public class IMDBMoviesServlet extends HttpServlet {
   /**
    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
    */
+  @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     String title = request.getParameter("title");
     System.out.println(title);
     if (title != null && !title.trim().isEmpty()) {
       String jsonResponse = searchMovie(title);
+
       if (jsonResponse != null) {
         JSONObject movieData = new JSONObject(new JSONTokener(jsonResponse));
+        System.out.println(movieData);
         Map<String, String> movieDetails = new HashMap<>();
         movieDetails.put("Title", movieData.optString("Title"));
         movieDetails.put("Year", movieData.optString("Year"));
@@ -53,7 +56,7 @@ public class IMDBMoviesServlet extends HttpServlet {
 
   private String searchMovie(String title) {
     String apiUrlBuilder =
-        String.format("http://www.omdbapi.com/?t=%s&apikey=%s", title.replace(" ", "+"), API_KEY);
+        String.format("http://www.omdbapi.com/?s=%s&apikey=%s", title.replace(" ", "+"), API_KEY);
 
     try {
       HttpClient client = HttpClient.newHttpClient();

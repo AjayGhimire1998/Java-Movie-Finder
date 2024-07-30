@@ -66,10 +66,10 @@ body {
 </style>
 </head>
 <body>
-	
+
 	<h1 class="welcome">A Movie Finder App</h1>
 	<br />
-	<form action="" method="get" class="search">
+	<form action="/movies" method="get" class="search">
 		<input type="text" placeholder="Type name to search.."
 			class="search-input" id="title" name="title"
 			value="${param.title}" /> <input type="submit"

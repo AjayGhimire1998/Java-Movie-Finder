@@ -17,6 +17,7 @@ public class ListMovie extends HttpServlet {
   /**
    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
    */
+  @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     ArrayList<Movie> movies = MovieIO.getMovies();

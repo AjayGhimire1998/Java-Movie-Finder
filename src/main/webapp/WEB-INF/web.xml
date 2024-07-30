@@ -20,6 +20,12 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>IMDBMoviesServlet</servlet-name>
-    <url-pattern>/</url-pattern>
+    <url-pattern>/movies</url-pattern>
   </servlet-mapping>
+  
+
+  
+  
+
+  
 </web-app>
