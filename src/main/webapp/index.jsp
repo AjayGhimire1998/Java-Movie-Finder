@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
 <%@ page language="java"
 	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -76,43 +77,34 @@ body {
 			value="Search" class="search-submit" />
 	</form>
 	<div class="results">
+
 		<%
-		Map<String, String> movieDetails = (Map<String, String>) request.getAttribute("movieDetails");
-		if (movieDetails != null) {
+		List<Map<String, String>> movieList = (List<Map<String, String>>) request.getAttribute("movieList");
+
+		for (int i = 0; i < movieList.size(); i++) {
+		  Map<String, String> movie = movieList.get(i);
 		%>
-		<h2>Movie Details</h2>
-		<p>
-			Title:
-			<%=movieDetails.get("Title")%></p>
-		<p>
-			Year:
-			<%=movieDetails.get("Year")%></p>
-		<p>
-			Genre:
-			<%=movieDetails.get("Genre")%></p>
-		<p>
-			IMDb Rating:
-			<%=movieDetails.get("imdbRating")%></p>
-		<p>
-			<img src="<%=movieDetails.get("Poster")%>" alt="Poster" />
-		</p>
-		<form action="/" method="post">
-			<input type="hidden" name="title"
-				value="<%=movieDetails.get("Title")%>"> <input
-				type="hidden" name="year"
-				value="<%=movieDetails.get("Year")%>"> <input
-				type="hidden" name="genre"
-				value="<%=movieDetails.get("Genre")%>"> <input
-				type="hidden" name="imdbRating"
-				value="<%=movieDetails.get("imdbRating")%>"> <input
-				type="hidden" name="poster"
-				value="<%=movieDetails.get("Poster")%>"> <input
-				type="submit" value="Save to Database">
-		</form>
-		<%
-		} else {
-		%>
-		<p>No movie details found.</p>
+
+		<div class="movie">
+			<img src="${movie.Poster}" alt="Poster" />
+			<div class="movie-details">
+				<p>Title: ${movie.get("Title")}</p>
+				<p>Year: ${movie.Year}</p>
+				<p>Genre: ${movie.Genre}</p>
+				<p>IMDb Rating: ${movie.imdbRating}</p>
+				<form action="/" method="post">
+					<input type="hidden" name="title"
+						value="${movie.Title}"> <input type="hidden"
+						name="year" value="${movie.Year}"> <input
+						type="hidden" name="genre" value="${movie.Genre}">
+					<input type="hidden" name="imdbRating"
+						value="${movie.imdbRating}"> <input
+						type="hidden" name="poster" value="${movie.Poster}">
+					<input type="submit" value="Save to Database">
+				</form>
+			</div>
+		</div>
+		}
 		<%
 		}
 		%>

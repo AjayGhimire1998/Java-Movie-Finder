@@ -7,8 +7,11 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import jakarta.servlet.ServletException;
@@ -40,15 +43,23 @@ public class IMDBMoviesServlet extends HttpServlet {
       String jsonResponse = searchMovie(title);
 
       if (jsonResponse != null) {
-        JSONObject movieData = new JSONObject(new JSONTokener(jsonResponse));
-        System.out.println(movieData);
-        Map<String, String> movieDetails = new HashMap<>();
-        movieDetails.put("Title", movieData.optString("Title"));
-        movieDetails.put("Year", movieData.optString("Year"));
-        movieDetails.put("Genre", movieData.optString("Genre"));
-        movieDetails.put("imdbRating", movieData.optString("imdbRating"));
-        movieDetails.put("Poster", movieData.optString("Poster"));
-        request.setAttribute("movieDetails", movieDetails);
+        JSONObject moviesData = new JSONObject(new JSONTokener(jsonResponse));
+        JSONArray moviesArray = moviesData.getJSONArray("Search");
+
+        List<Map<String, String>> movieList = new ArrayList<>();
+
+        System.out.println(moviesData);
+        for (int i = 0; i < moviesArray.length(); i++) {
+          JSONObject movieData = moviesArray.getJSONObject(i);
+          Map<String, String> movieDetails = new HashMap<>();
+          movieDetails.put("Title", movieData.optString("Title"));
+          movieDetails.put("Year", movieData.optString("Year"));
+          movieDetails.put("Genre", movieData.optString("Genre"));
+          movieDetails.put("imdbRating", movieData.optString("imdbRating"));
+          movieDetails.put("Poster", movieData.optString("Poster"));
+          movieList.add(movieDetails);
+        }
+        request.setAttribute("movieList", movieList);
       }
     }
     request.getRequestDispatcher("index.jsp").forward(request, response);
