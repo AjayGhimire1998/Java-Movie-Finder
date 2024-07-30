@@ -143,9 +143,8 @@ body {
 <body>
 	<h1 class="welcome">A Movie Finder App</h1>
 	<br />
-
-		<input type="submit" value="⬅ ︎Go Back"
-			class="favourite-submit" onClick="history.back();"/>
+	<input type="submit" value="⬅ ︎Go Back"
+		class="favourite-submit" onClick="history.back();" />
 
 	<br />
 	<h1>Favourite Movies</h1>
