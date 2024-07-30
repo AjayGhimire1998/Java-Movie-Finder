@@ -39,7 +39,6 @@ public class IMDBMoviesServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     String title = request.getParameter("title");
-    System.out.println(title);
     if (title != null && !title.trim().isEmpty()) {
       String jsonResponse = searchMovies(title);
 
@@ -95,11 +94,12 @@ public class IMDBMoviesServlet extends HttpServlet {
     String poster = req.getParameter("poster");
 
 
-    IMDBMovieDAO.addToFavourites(title, year, rating, genre, plot, poster);
+    if (!IMDBMovieDAO.movieExits(title, year)) {
+      IMDBMovieDAO.addToFavourites(title, year, rating, genre, plot, poster);
+    }
 
 
-
-    resp.sendRedirect("favourites.jsp");
+    resp.sendRedirect("/favourites");
   }
 
 

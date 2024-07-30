@@ -31,6 +31,7 @@ public class IMDBMovieDAO {
         imdbMovie.setPlot(resultSet.getString("plot"));
         imdbMovie.setGenres(resultSet.getString("genres"));
         imdbMovie.setRating(resultSet.getDouble("rating"));
+        imdbMovie.setPoster(resultSet.getString("poster"));
         favouriteMovies.add(imdbMovie.toIMDBMovieMap());
       }
     } catch (SQLException e) {
@@ -40,7 +41,27 @@ public class IMDBMovieDAO {
 
 
     System.out.println(favouriteMovies);
+
     return favouriteMovies;
+  }
+
+  public static boolean movieExits(String title, int year) {
+    String sql = "SELECT COUNT(*) FROM movies WHERE title = ? AND year = ?";
+    try (Connection connection = getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql)) {
+      statement.setString(1, title);
+      statement.setInt(2, year);
+      try (ResultSet resultSet = statement.executeQuery()) {
+        if (resultSet.next()) {
+          return resultSet.getInt(1) > 0;
+        }
+      }
+    } catch (SQLException e) {
+      System.err.println("Cannot establish connection to DB for checking movie existence.");
+      e.printStackTrace();
+    }
+    return false;
+
   }
 
   public static void addToFavourites(String title, int year, double rating, String genres,
@@ -73,7 +94,27 @@ public class IMDBMovieDAO {
       e.printStackTrace();
     }
 
+  }
 
+  public static void deleteMovieFromFavourite(String title) {
+    String sql = "DELETE FROM movies WHERE title = ?";
+
+    try (Connection connection = getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql)) {
+
+      statement.setString(1, title);
+
+      int rowsDeleted = statement.executeUpdate();
+      if (rowsDeleted > 0) {
+        System.out.println("A movie was deleted successfully!");
+      } else {
+        System.out.println("No movie found with the title: " + title);
+      }
+
+    } catch (SQLException e) {
+      System.err.println("Cannot establish connection to DB for deleting a favourite movie.");
+      e.printStackTrace();
+    }
   }
 
 }

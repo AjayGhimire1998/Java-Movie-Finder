@@ -21,6 +21,108 @@ body {
 	font-size: 50px;
 	margin-top: 20px;
 }
+
+.results {
+	margin-top: 30px;
+	width: 70%;
+}
+
+.empty-movie {
+	text-align: center;
+}
+
+.results {
+	margin-top: 30px;
+	width: 70%;
+}
+
+.empty-movie {
+	text-align: center;
+}
+
+.movie {
+	width: 50%;
+	border-bottom: 1px solid white;
+	padding: 20px;
+	display: flex;
+	align-items: center;
+	gap: 40px;
+	clear: both;
+	border-bottom: 3px solid white;
+}
+
+.movie:nth-child(odd) {
+	float: left;
+}
+
+.movie:nth-child(even) {
+	float: right;
+}
+
+.movie img {
+	width: auto;
+	height: 250px;
+	/* Adjust the height to match the movie component height */
+	border-radius: 10px;
+}
+
+.movie-details {
+	display: flex;
+	flex-direction: column;
+}
+
+.movie-details p {
+	font-size: 20px;
+	margin: 5px 0;
+}
+
+.movie-details>p>.title {
+	font-size: 22px;
+	margin: 5px 0;
+}
+
+.movie-details p label {
+	font-size: 22px;
+	font-weight: bold;
+	color: #f53333;
+}
+
+.movie-details p span {
+	font-size: 20px;
+	color: #fff;
+}
+
+.movie-details>p>.title-span {
+	font-size: 35px;
+	color: #fff;
+	font-weight: bold;
+}
+
+.movie-details>p>.plot {
+	font-size: 12px;
+	white-space: normal;
+	color: #fff;
+	font-style: italic;
+}
+
+.movie-details form {
+	margin-top: 10px;
+}
+
+.movie-details input[type="submit"] {
+	background: #f53333;
+	color: white;
+	font-size: 18px;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 10px;
+	outline: none;
+	cursor: pointer;
+}
+
+.movie-details input[type="submit"]:hover {
+	background: #bf8415;
+}
 </style>
 </head>
 <body>
@@ -35,7 +137,7 @@ body {
 		  for (Map<String, String> movie : movieList) {
 		%>
 		<div class="movie">
-			<img src="<%=movie.get("Poster")%>" alt="Poster" />
+			<img src="<%=movie.get("poster")%>" alt="Poster" />
 			<div class="movie-details">
 				<p>
 					<label class="title">Title:</label> <span
@@ -53,7 +155,7 @@ body {
 				<p>
 					<label>IMDb Rating:</label> <span><%=movie.get("rating")%></span>
 				</p>
-				<form action="/" method="post">
+				<form action="/favourites" method="post">
 					<input type="hidden" name="title"
 						value="<%=movie.get("title")%>"> <input
 						type="hidden" name="year"
@@ -72,7 +174,7 @@ body {
 		}
 		} else {
 		%>
-		<p class="empty-movie">No movies found.</p>
+		<p class="empty-movie">No favourites saved.</p>
 		<%
 		}
 		%>

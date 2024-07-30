@@ -94,7 +94,6 @@ body {
 	align-items: center;
 	gap: 40px;
 	clear: both;
-	transition: box-shadow 0.3s ease-in-out;
 	border-bottom: 3px solid white;
 }
 
@@ -107,7 +106,9 @@ body {
 }
 
 .movie img {
-	width: 100px;
+	width: auto;
+	height: 250px;
+	/* Adjust the height to match the movie component height */
 	border-radius: 10px;
 }
 
@@ -212,7 +213,7 @@ body {
 				<p>
 					<label>IMDb Rating:</label> <span><%=movie.get("imdbRating")%></span>
 				</p>
-				<form action="/favourites" method="post">
+				<form action="/movies" method="post">
 					<input type="hidden" name="title"
 						value="<%=movie.get("Title")%>"> <input
 						type="hidden" name="year"

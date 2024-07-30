@@ -39,8 +39,12 @@ public class IMDBSavedMoviesServlet extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-    // TODO Auto-generated method stub
-    super.doPost(req, resp);
+    String title = req.getParameter("title");
+
+    IMDBMovieDAO.deleteMovieFromFavourite(title);
+    resp.sendRedirect("/favourites");
+
+
   }
 
 
