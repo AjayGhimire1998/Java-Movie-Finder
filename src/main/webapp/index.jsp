@@ -30,7 +30,7 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 25px;
+	gap: 30px;
 	margin: 30px;
 	width: 100%;
 }
@@ -40,19 +40,20 @@ body {
 	padding: 15px;
 	font-size: 30px;
 	text-align: center;
-	border: 1px solid white;
-	border-radius: 5px;
-	background: #2c2c2c;
+	border: 3px solid white;
+	border-radius: 10px;
+	background: #48494a;
 	color: white;
 }
 
 .search>.search-submit {
 	background: #f53333;
+	width: 30%;
 	color: white;
 	font-size: 25px;
 	padding: 15px 30px;
 	border: none;
-	border-radius: 25px;
+	border-radius: 10px;
 	outline: none;
 }
 
@@ -61,12 +62,32 @@ body {
 	cursor: pointer;
 }
 
+.favourites>.favourite-submit {
+	background: #bf8415;
+	color: white;
+	font-size: 18px;
+	padding: 12px 20px;
+	border: none;
+	border-radius: 15px;
+	outline: none;
+}
+
+.favourites>.favourite-submit:hover {
+	background: #1f48b8;
+	cursor: pointer;
+}
+
 .results {
-	margin-top: 20px;
+	margin-top: 30px;
 	width: 70%;
 }
 
+.empty-movie{
+	text-align: center;
+}
+
 .movie {
+	width: 50%;
 	border-bottom: 1px solid white;
 	padding: 20px;
 	display: flex;
@@ -74,6 +95,7 @@ body {
 	gap: 40px;
 	clear: both;
 	transition: box-shadow 0.3s ease-in-out;
+	border-bottom: 3px solid white;
 }
 
 .movie:nth-child(odd) {
@@ -123,7 +145,7 @@ body {
 
 .movie-details>p>.plot {
 	font-size: 12px;
-	width: 200px;
+	white-space: normal;
 	color: #fff;
 	font-style: italic;
 }
@@ -144,7 +166,7 @@ body {
 }
 
 .movie-details input[type="submit"]:hover {
-	background: #43cc21;
+	background: #bf8415;
 }
 </style>
 </head>
@@ -153,10 +175,16 @@ body {
 	<h1 class="welcome">A Movie Finder App</h1>
 	<br />
 	<form action="/movies" method="get" class="search">
-		<input type="text" placeholder="Type name to search.."
+		<input type="text" placeholder="Search title..."
 			class="search-input" id="title" name="title"
 			value="${param.title}" /> <input type="submit"
 			value="Search" class="search-submit" />
+	</form>
+
+	<form action="/movies/favourites" method="get"
+		class="favourites">
+		<input type="submit" value="Favourites"
+			class="favourite-submit" />
 	</form>
 	<div class="results">
 		<%
@@ -204,7 +232,7 @@ body {
 		}
 		} else {
 		%>
-		<p>No movies found.</p>
+		<p class="empty-movie">No movies found.</p>
 		<%
 		}
 		}

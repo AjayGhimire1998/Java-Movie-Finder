@@ -96,14 +96,6 @@ public class IMDBMoviesServlet extends HttpServlet {
 
 
 
-  @Override
-  protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
-    // TODO Auto-generated method stub
-    super.doDelete(req, resp);
-  }
-
-
   private String searchMovies(String title) {
     String apiUrlBuilder =
         String.format("http://www.omdbapi.com/?s=%s&apikey=%s", title.replace(" ", "+"), API_KEY);
