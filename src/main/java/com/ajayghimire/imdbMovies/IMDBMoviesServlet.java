@@ -7,6 +7,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
+import java.util.HashMap;
+import java.util.Map;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import jakarta.servlet.ServletException;
@@ -22,7 +24,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class IMDBMoviesServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
   private static final String API_KEY = "1f4503a2";
-  private static String API_URI = "http://www.omdbapi.com/?t=%s&apikey=%s";
+
 
 
   /**
@@ -30,21 +32,26 @@ public class IMDBMoviesServlet extends HttpServlet {
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+    System.out.println("Is being called?");
     String title = request.getParameter("title");
-    response.setContentType("text/html");
-
     if (title != null && !title.trim().isEmpty()) {
       String jsonResponse = searchMovie(title);
       if (jsonResponse != null) {
-        JSONObject jsonData = new JSONObject(new JSONTokener(jsonResponse));
-        request.setAttribute("data", jsonData);
-        request.getRequestDispatcher("/index.jsp").forward(request, response);
+        JSONObject movieData = new JSONObject(new JSONTokener(jsonResponse));
+        Map<String, String> movieDetails = new HashMap<>();
+        movieDetails.put("Title", movieData.optString("Title"));
+        movieDetails.put("Year", movieData.optString("Year"));
+        movieDetails.put("Genre", movieData.optString("Genre"));
+        movieDetails.put("imdbRating", movieData.optString("imdbRating"));
+        request.setAttribute("movieDetails", movieDetails);
       }
     }
+    request.getRequestDispatcher("index.jsp").forward(request, response);
   }
 
   private String searchMovie(String title) {
-    String apiUrlBuilder = String.format(API_URI, title.replace(" ", "+"), API_KEY);
+    String apiUrlBuilder =
+        String.format("http://www.omdbapi.com/?t=%s&apikey=%s", title.replace(" ", "+"), API_KEY);
     HttpClient client = HttpClient.newHttpClient();
     try {
       HttpRequest request = HttpRequest.newBuilder(new URI(apiUrlBuilder)).build();

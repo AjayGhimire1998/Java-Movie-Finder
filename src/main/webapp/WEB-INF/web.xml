@@ -15,13 +15,11 @@
     <url-pattern>/ListMovie</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description></description>
-    <display-name>IMDBMoviesServlet</display-name>
     <servlet-name>IMDBMoviesServlet</servlet-name>
     <servlet-class>com.ajayghimire.imdbMovies.IMDBMoviesServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>IMDBMoviesServlet</servlet-name>
-    <url-pattern>/</url-pattern>
+    <url-pattern>/imdbMovies</url-pattern>
   </servlet-mapping>
 </web-app>

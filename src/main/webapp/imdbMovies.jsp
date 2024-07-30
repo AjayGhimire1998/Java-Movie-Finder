@@ -70,7 +70,7 @@ body {
 	<br />
 
 
-	<form action="/imdbMovies" method="get" class="search">
+	<form action="/" method="get" class="search">
 		<input type="text" placeholder="Type name to search.."
 			class="search-input" id="title" name="title" /> <input
 			type="submit" value="Search" class="search-submit" />
