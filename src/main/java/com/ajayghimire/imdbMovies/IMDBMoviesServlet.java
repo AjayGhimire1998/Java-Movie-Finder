@@ -51,24 +51,21 @@ public class IMDBMoviesServlet extends HttpServlet {
         System.out.println(moviesData);
         for (int i = 0; i < moviesArray.length(); i++) {
           JSONObject movieData = moviesArray.getJSONObject(i);
-          Map<String, String> movieDetails = new HashMap<>();
-          movieDetails.put("Title", movieData.optString("Title"));
-          movieList.add(movieDetails);
-        }
 
-        for (int j = 0; j < movieList.size(); j++) {
-          Map<String, String> eachMovieMap = movieList.get(j);
-          String movieTitle = eachMovieMap.get("Title");
+          // movieDetails.put("Title", movieData.optString("Title"));
+          String movieTitle = movieData.optString("Title");
           String singleMovieData = searchMovie(movieTitle);
           JSONObject singleMovieJSON = new JSONObject(new JSONTokener(singleMovieData));
 
-          eachMovieMap.put("Year", singleMovieJSON.optString("Year"));
-          eachMovieMap.put("Genre", singleMovieJSON.optString("Genre"));
-          eachMovieMap.put("imdbRating", singleMovieJSON.optString("imdbRating"));
-          eachMovieMap.put("Poster", singleMovieJSON.optString("Poster"));
+          Map<String, String> movieDetails = new HashMap<>();
+          movieDetails.put("Title", singleMovieJSON.optString("Title"));
+          movieDetails.put("Year", singleMovieJSON.optString("Year"));
+          movieDetails.put("Genre", singleMovieJSON.optString("Genre"));
+          movieDetails.put("imdbRating", singleMovieJSON.optString("imdbRating"));
+          movieDetails.put("Poster", singleMovieJSON.optString("Poster"));
 
+          movieList.add(movieDetails);
         }
-
 
 
         request.setAttribute("movieList", movieList);

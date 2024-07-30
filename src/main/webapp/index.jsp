@@ -61,9 +61,8 @@ body {
 .results {
 	margin-top: 20px;
 	width: 100%;
-	display:flex;
-	flex-direction:column;
-	
+	display: flex;
+	flex-direction: column;
 }
 
 .movie {
@@ -134,7 +133,13 @@ body {
 		}
 		} else {
 		%>
+		<%
+		if (request.getParameter("title") != "") {
+		%>
 		<p>No movies found.</p>
+		<%
+		}
+		%>
 		<%
 		}
 		%>
