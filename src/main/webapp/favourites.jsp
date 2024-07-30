@@ -123,12 +123,34 @@ body {
 .movie-details input[type="submit"]:hover {
 	background: #bf8415;
 }
+
+.favourite-submit {
+	background: #1f48b8;
+	color: white;
+	font-size: 18px;
+	padding: 10px 16px;
+	border: none;
+	border-radius: 15px;
+	outline: none;
+}
+
+.favourite-submit:hover {
+	background: #bf8415;
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
 	<h1 class="welcome">A Movie Finder App</h1>
 	<br />
+
+		<input type="submit" value="⬅ ︎Go Back"
+			class="favourite-submit" onClick="history.back();"/>
+
+	<br />
 	<h1>Favourite Movies</h1>
+	<br />
+
 	<div class="results">
 		<%
 		List<Map<String, String>> movieList = (List<Map<String, String>>) request.getAttribute("fav");

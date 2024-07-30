@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -39,9 +40,7 @@ public class IMDBMovieDAO {
       e.printStackTrace();
     }
 
-
-    System.out.println(favouriteMovies);
-
+    Collections.reverse(favouriteMovies);
     return favouriteMovies;
   }
 
