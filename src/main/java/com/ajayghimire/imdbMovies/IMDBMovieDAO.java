@@ -2,6 +2,7 @@ package com.ajayghimire.imdbMovies;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,20 +22,17 @@ public class IMDBMovieDAO {
     IMDBMovie imdbMovie = new IMDBMovie();
     List<Map<String, String>> favouriteMovies = new ArrayList<>();
 
-    try {
-      Connection conn = getConnection();
-      Statement st = conn.createStatement();
-      ResultSet rs = st.executeQuery("SELECT * FROM movies");
-      while (rs.next()) {
-        imdbMovie.setTitle(rs.getString("title"));
-        imdbMovie.setYear(rs.getInt("year"));
-        imdbMovie.setPlot(rs.getString("plot"));
-        imdbMovie.setGenres(rs.getString("genres"));
-        imdbMovie.setRating(rs.getDouble("rating"));
+    try (Connection connection = getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM movies");) {
+      while (resultSet.next()) {
+        imdbMovie.setTitle(resultSet.getString("title"));
+        imdbMovie.setYear(resultSet.getInt("year"));
+        imdbMovie.setPlot(resultSet.getString("plot"));
+        imdbMovie.setGenres(resultSet.getString("genres"));
+        imdbMovie.setRating(resultSet.getDouble("rating"));
         favouriteMovies.add(imdbMovie.toIMDBMovieMap());
       }
-      rs.close();
-      st.close();
     } catch (SQLException e) {
       System.err.println("Cannot establish connection to DB for getting favourite movies.");
       e.printStackTrace();
@@ -45,9 +43,16 @@ public class IMDBMovieDAO {
     return favouriteMovies;
   }
 
-  public void addToFavourites() {
-    try {
-      Connection conn = getConnection();
+  public void addToFavourites(String title, int year, double rating, String genres, String plot) {
+    try (Connection connection = getConnection();
+        PreparedStatement statement = connection.prepareStatement(
+            "INSERT INTO movies (title, year, rating, genres, plot) VALUES (?, ?, ?, ?, ?)");) {
+      statement.setString(1, title);
+      statement.setInt(2, year);
+      statement.setDouble(3, rating);
+      statement.setString(4, genres);
+      statement.setString(5, plot);
+
 
 
     } catch (SQLException e) {
