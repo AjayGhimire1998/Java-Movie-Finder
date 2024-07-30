@@ -85,6 +85,25 @@ public class IMDBMoviesServlet extends HttpServlet {
     request.getRequestDispatcher("index.jsp").forward(request, response);
   }
 
+
+
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
+    // TODO Auto-generated method stub
+    super.doPost(req, resp);
+  }
+
+
+
+  @Override
+  protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
+    // TODO Auto-generated method stub
+    super.doDelete(req, resp);
+  }
+
+
   private String searchMovies(String title) {
     String apiUrlBuilder =
         String.format("http://www.omdbapi.com/?s=%s&apikey=%s", title.replace(" ", "+"), API_KEY);

@@ -5,6 +5,7 @@ public class IMDBMovie {
   private int year;
   private double rating;
   private String genres;
+  private String plot;
 
   public String getTitle() {
     return title;
@@ -37,4 +38,20 @@ public class IMDBMovie {
   public void setRating(double rating) {
     this.rating = rating;
   }
+
+  public String getPlot() {
+    return plot;
+  }
+
+  public void setPlot(String plot) {
+    this.plot = plot;
+  }
+
+  @Override
+  public String toString() {
+    return "IMDBMovie [title=" + title + ", year=" + year + ", rating=" + rating + ", genres="
+        + genres + ", plot=" + plot + "]";
+  }
+
+
 }

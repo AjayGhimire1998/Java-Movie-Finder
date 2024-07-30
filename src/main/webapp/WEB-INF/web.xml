@@ -22,10 +22,14 @@
     <servlet-name>IMDBMoviesServlet</servlet-name>
     <url-pattern>/movies</url-pattern>
   </servlet-mapping>
-  
-
-  
-  
-
-  
+  <servlet>
+    <description></description>
+    <display-name>IMDBSavedMoviesServlet</display-name>
+    <servlet-name>IMDBSavedMoviesServlet</servlet-name>
+    <servlet-class>com.ajayghimire.imdbMovies.IMDBSavedMoviesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>IMDBSavedMoviesServlet</servlet-name>
+    <url-pattern>/movies/favourites</url-pattern>
+  </servlet-mapping>
 </web-app>

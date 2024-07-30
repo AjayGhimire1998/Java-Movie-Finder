@@ -84,27 +84,6 @@ body {
 	float: right;
 }
 
-.movie:hover {
-	/* box-shadow: 0 0 20px #43cc21; */
-/* 	animation: glow 2.5s infinite alternate; */
-}
-
-@
-keyframes glow { 0% {
-	box-shadow: 0 0 20px #43cc21;
-}
-
-100
-%
-{
-box-shadow
-:
-0
-0
-40px
-#f53333;
-}
-}
 .movie img {
 	width: 100px;
 	border-radius: 10px;
@@ -119,8 +98,9 @@ box-shadow
 	font-size: 20px;
 	margin: 5px 0;
 }
+
 .movie-details>p>.title {
-	font-size: 40px;
+	font-size: 22px;
 	margin: 5px 0;
 }
 
@@ -138,14 +118,15 @@ box-shadow
 .movie-details>p>.title-span {
 	font-size: 35px;
 	color: #fff;
+	font-weight: bold;
 }
+
 .movie-details>p>.plot {
 	font-size: 12px;
-	max-width:50%;
+	width: 200px;
 	color: #fff;
+	font-style: italic;
 }
-
-
 
 .movie-details form {
 	margin-top: 10px;
@@ -172,43 +153,60 @@ box-shadow
 	<h1 class="welcome">A Movie Finder App</h1>
 	<br />
 	<form action="/movies" method="get" class="search">
-		<input type="text" placeholder="Type name to search.." class="search-input" id="title" name="title"
-			value="${param.title}" />
-		<input type="submit" value="Search" class="search-submit" />
+		<input type="text" placeholder="Type name to search.."
+			class="search-input" id="title" name="title"
+			value="${param.title}" /> <input type="submit"
+			value="Search" class="search-submit" />
 	</form>
 	<div class="results">
 		<%
 		List<Map<String, String>> movieList = (List<Map<String, String>>) request.getAttribute("movieList");
 		String searchTitle = request.getParameter("title");
 		if (searchTitle != null && !searchTitle.isEmpty()) {
-			if (movieList != null && !movieList.isEmpty()) {
-				for (Map<String, String> movie : movieList) {
+		  if (movieList != null && !movieList.isEmpty()) {
+		    for (Map<String, String> movie : movieList) {
 		%>
 		<div class="movie">
 			<img src="<%=movie.get("Poster")%>" alt="Poster" />
 			<div class="movie-details">
-				<p><label class="title">Title:</label> <span class="title-span"><%=movie.get("Title")%></span></p>
-				<p><span class="plot"><%=movie.get("Plot")%></span></p>
-				<p><label>Year:</label> <span><%=movie.get("Year")%></span></p>
-				<p><label>Genre:</label> <span><%=movie.get("Genre")%></span></p>
-				<p><label>IMDb Rating:</label> <span><%=movie.get("imdbRating")%></span></p>
+				<p>
+					<label class="title">Title:</label> <span
+						class="title-span"><%=movie.get("Title")%></span>
+				</p>
+				<p>
+					<span class="plot"><%=movie.get("Plot")%></span>
+				</p>
+				<p>
+					<label>Year:</label> <span><%=movie.get("Year")%></span>
+				</p>
+				<p>
+					<label>Genre:</label> <span><%=movie.get("Genre")%></span>
+				</p>
+				<p>
+					<label>IMDb Rating:</label> <span><%=movie.get("imdbRating")%></span>
+				</p>
 				<form action="/" method="post">
-					<input type="hidden" name="title" value="<%=movie.get("Title")%>">
-					<input type="hidden" name="year" value="<%=movie.get("Year")%>">
-					<input type="hidden" name="genre" value="<%=movie.get("Genre")%>">
-					<input type="hidden" name="imdbRating" value="<%=movie.get("imdbRating")%>">
-					<input type="hidden" name="poster" value="<%=movie.get("Poster")%>">
-					<input type="submit" value="Save to Database">
+					<input type="hidden" name="title"
+						value="<%=movie.get("Title")%>"> <input
+						type="hidden" name="year"
+						value="<%=movie.get("Year")%>"> <input
+						type="hidden" name="genre"
+						value="<%=movie.get("Genre")%>"> <input
+						type="hidden" name="imdbRating"
+						value="<%=movie.get("imdbRating")%>"> <input
+						type="hidden" name="poster"
+						value="<%=movie.get("Poster")%>"> <input
+						type="submit" value="Save to Favourites">
 				</form>
 			</div>
 		</div>
 		<%
-				}
-			} else {
+		}
+		} else {
 		%>
 		<p>No movies found.</p>
 		<%
-			}
+		}
 		}
 		%>
 	</div>
