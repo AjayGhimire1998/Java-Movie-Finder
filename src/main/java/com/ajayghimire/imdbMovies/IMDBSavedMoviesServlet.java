@@ -29,21 +29,20 @@ public class IMDBSavedMoviesServlet extends HttpServlet {
       throws ServletException, IOException {
     String title = request.getParameter("title");
 
-    IMDBMovieDAO imdbMovieDAO = new IMDBMovieDAO();
-    List<Map<String, String>> favouriteMovies = imdbMovieDAO.getFavouriteMovies();
+    List<Map<String, String>> favouriteMovies = IMDBMovieDAO.getFavouriteMovies();
     // imdbMovieDAO.getImdbMovie();
     request.setAttribute("fav", favouriteMovies);
 
     request.getRequestDispatcher("favourites.jsp").forward(request, response);
   }
 
-  /**
-   * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-   */
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
     // TODO Auto-generated method stub
-    doGet(request, response);
+    super.doPost(req, resp);
   }
+
+
 
 }

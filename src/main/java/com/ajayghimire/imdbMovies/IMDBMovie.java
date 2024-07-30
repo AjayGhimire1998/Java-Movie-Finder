@@ -9,6 +9,7 @@ public class IMDBMovie {
   private double rating;
   private String genres;
   private String plot;
+  private String poster;
 
   public String getTitle() {
     return title;
@@ -50,6 +51,14 @@ public class IMDBMovie {
     this.plot = plot;
   }
 
+  public String getPoster() {
+    return poster;
+  }
+
+  public void setPoster(String poster) {
+    this.poster = poster;
+  }
+
   public Map<String, String> toIMDBMovieMap() {
     Map<String, String> movieMap = new HashMap<>();
     movieMap.put("title", this.title);
@@ -57,6 +66,7 @@ public class IMDBMovie {
     movieMap.put("rating", Double.toString(this.rating));
     movieMap.put("genres", this.genres);
     movieMap.put("plot", this.plot);
+    movieMap.put("poster", this.poster);
     return movieMap;
 
   }

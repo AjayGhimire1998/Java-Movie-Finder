@@ -49,12 +49,9 @@ public class IMDBMoviesServlet extends HttpServlet {
         try {
           moviesArray = moviesData.getJSONArray("Search");
           List<Map<String, String>> movieList = new ArrayList<>();
-
-          System.out.println(moviesData);
           for (int i = 0; i < moviesArray.length(); i++) {
             JSONObject movieData = moviesArray.getJSONObject(i);
 
-            // movieDetails.put("Title", movieData.optString("Title"));
             String movieTitle = movieData.optString("Title");
             String singleMovieData = searchMovie(movieTitle);
             JSONObject singleMovieJSON = new JSONObject(new JSONTokener(singleMovieData));
@@ -90,8 +87,19 @@ public class IMDBMoviesServlet extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-    // TODO Auto-generated method stub
-    super.doPost(req, resp);
+    String title = req.getParameter("title");
+    int year = Integer.parseInt(req.getParameter("year"));
+    String genre = req.getParameter("genre");
+    double rating = Double.parseDouble(req.getParameter("rating"));
+    String plot = req.getParameter("plot");
+    String poster = req.getParameter("poster");
+
+
+    IMDBMovieDAO.addToFavourites(title, year, rating, genre, plot, poster);
+
+
+
+    resp.sendRedirect("favourites.jsp");
   }
 
 

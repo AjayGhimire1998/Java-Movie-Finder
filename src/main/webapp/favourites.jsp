@@ -58,7 +58,7 @@ body {
 						value="<%=movie.get("title")%>"> <input
 						type="hidden" name="year"
 						value="<%=movie.get("year")%>"> <input
-						type="hidden" name="genres"
+						type="hidden" name="genre"
 						value="<%=movie.get("genres")%>"> <input
 						type="hidden" name="rating"
 						value="<%=movie.get("rating")%>"> <input

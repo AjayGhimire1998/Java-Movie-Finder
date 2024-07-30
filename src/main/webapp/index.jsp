@@ -181,8 +181,7 @@ body {
 			value="Search" class="search-submit" />
 	</form>
 
-	<form action="/movies/favourites" method="get"
-		class="favourites">
+	<form action="/favourites" method="get" class="favourites">
 		<input type="submit" value="Favourites ➚"
 			class="favourite-submit" />
 	</form>
@@ -213,14 +212,16 @@ body {
 				<p>
 					<label>IMDb Rating:</label> <span><%=movie.get("imdbRating")%></span>
 				</p>
-				<form action="/" method="post">
+				<form action="/favourites" method="post">
 					<input type="hidden" name="title"
 						value="<%=movie.get("Title")%>"> <input
 						type="hidden" name="year"
 						value="<%=movie.get("Year")%>"> <input
+						type="hidden" name="plot"
+						value="<%=movie.get("Plot")%>"> <input
 						type="hidden" name="genre"
 						value="<%=movie.get("Genre")%>"> <input
-						type="hidden" name="imdbRating"
+						type="hidden" name="rating"
 						value="<%=movie.get("imdbRating")%>"> <input
 						type="hidden" name="poster"
 						value="<%=movie.get("Poster")%>"> <input

@@ -12,13 +12,13 @@ import java.util.Map;
 
 public class IMDBMovieDAO {
 
-  private Connection getConnection() throws SQLException {
+  private static Connection getConnection() throws SQLException {
     return DriverManager.getConnection("jdbc:postgresql://localhost:5432/imdbMovies");
   }
 
 
 
-  public List<Map<String, String>> getFavouriteMovies() {
+  public static List<Map<String, String>> getFavouriteMovies() {
     IMDBMovie imdbMovie = new IMDBMovie();
     List<Map<String, String>> favouriteMovies = new ArrayList<>();
 
@@ -43,17 +43,30 @@ public class IMDBMovieDAO {
     return favouriteMovies;
   }
 
-  public void addToFavourites(String title, int year, double rating, String genres, String plot) {
+  public static void addToFavourites(String title, int year, double rating, String genres,
+      String plot, String poster) {
+    String sql =
+        "INSERT INTO movies (title, year, rating, genres, plot, poster) VALUES (?, ?, ?, ?, ?, ?)";
+
     try (Connection connection = getConnection();
-        PreparedStatement statement = connection.prepareStatement(
-            "INSERT INTO movies (title, year, rating, genres, plot) VALUES (?, ?, ?, ?, ?)");) {
+        PreparedStatement statement =
+            connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
       statement.setString(1, title);
       statement.setInt(2, year);
       statement.setDouble(3, rating);
       statement.setString(4, genres);
       statement.setString(5, plot);
+      statement.setString(6, poster);
 
-
+      int rowsInserted = statement.executeUpdate();
+      if (rowsInserted > 0) {
+        System.out.println("A new movie was inserted successfully!");
+        var rs = statement.getGeneratedKeys();
+        if (rs.next()) {
+          System.out.println(rs);
+        }
+      }
 
     } catch (SQLException e) {
       System.err.println("Cannot establish connection to DB for adding to favourite movies.");
