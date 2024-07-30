@@ -9,7 +9,6 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
 	rel="stylesheet">
-
 <title>Movie Finder</title>
 <style>
 body {
@@ -19,7 +18,6 @@ body {
 	align-items: center;
 	background: #1b1c1b;
 	color: white;
-	display: flex;
 	max-height: 100vh;
 }
 
@@ -32,7 +30,6 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	justify-content: center;
 	gap: 25px;
 	margin: 30px;
 	width: 100%;
@@ -63,6 +60,27 @@ body {
 
 .results {
 	margin-top: 20px;
+	width: 100%;
+	display:flex;
+	flex-direction:column;
+	
+}
+
+.movie {
+	border-bottom: 1px solid white;
+	padding: 10px;
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.movie img {
+	width: 100px;
+}
+
+.movie-details {
+	display: flex;
+	flex-direction: column;
 }
 </style>
 </head>
@@ -77,41 +95,49 @@ body {
 			value="Search" class="search-submit" />
 	</form>
 	<div class="results">
-
 		<%
 		List<Map<String, String>> movieList = (List<Map<String, String>>) request.getAttribute("movieList");
-
-		for (int i = 0; i < movieList.size(); i++) {
-		  Map<String, String> movie = movieList.get(i);
+		if (movieList != null) {
+		  for (Map<String, String> movie : movieList) {
 		%>
-
 		<div class="movie">
-			<img src="${movie.Poster}" alt="Poster" />
+			<img src="<%=movie.get("Poster")%>" alt="Poster" />
 			<div class="movie-details">
-				<p>Title: ${movie.get("Title")}</p>
-				<p>Year: ${movie.Year}</p>
-				<p>Genre: ${movie.Genre}</p>
-				<p>IMDb Rating: ${movie.imdbRating}</p>
+				<p>
+					Title:
+					<%=movie.get("Title")%></p>
+				<p>
+					Year:
+					<%=movie.get("Year")%></p>
+				<p>
+					Genre:
+					<%=movie.get("Genre")%></p>
+				<p>
+					IMDb Rating:
+					<%=movie.get("imdbRating")%></p>
 				<form action="/" method="post">
 					<input type="hidden" name="title"
-						value="${movie.Title}"> <input type="hidden"
-						name="year" value="${movie.Year}"> <input
-						type="hidden" name="genre" value="${movie.Genre}">
-					<input type="hidden" name="imdbRating"
-						value="${movie.imdbRating}"> <input
-						type="hidden" name="poster" value="${movie.Poster}">
-					<input type="submit" value="Save to Database">
+						value="<%=movie.get("Title")%>"> <input
+						type="hidden" name="year"
+						value="<%=movie.get("Year")%>"> <input
+						type="hidden" name="genre"
+						value="<%=movie.get("Genre")%>"> <input
+						type="hidden" name="imdbRating"
+						value="<%=movie.get("imdbRating")%>"> <input
+						type="hidden" name="poster"
+						value="<%=movie.get("Poster")%>"> <input
+						type="submit" value="Save to Database">
 				</form>
 			</div>
 		</div>
+		<%
 		}
+		} else {
+		%>
+		<p>No movies found.</p>
 		<%
 		}
 		%>
 	</div>
-
-
-
-
 </body>
 </html>

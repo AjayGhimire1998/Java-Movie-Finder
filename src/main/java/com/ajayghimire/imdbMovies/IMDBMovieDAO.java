@@ -31,6 +31,7 @@ public class IMDBMovieDAO {
 
 
       String jsonResponse = response.body();
+      System.out.println(jsonResponse);
 
       JSONObject moviesData = new JSONObject(new JSONTokener(jsonResponse));
       if (moviesData.has("Search")) {
@@ -47,7 +48,7 @@ public class IMDBMovieDAO {
           movieDetails.put("Poster", movieData.optString("Poster"));
           movieList.add(movieDetails);
         }
-        System.out.println(movieList);
+        // System.out.println(movieList);
       }
 
 

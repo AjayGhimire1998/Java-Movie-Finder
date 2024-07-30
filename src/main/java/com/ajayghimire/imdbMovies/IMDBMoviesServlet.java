@@ -40,7 +40,7 @@ public class IMDBMoviesServlet extends HttpServlet {
     String title = request.getParameter("title");
     System.out.println(title);
     if (title != null && !title.trim().isEmpty()) {
-      String jsonResponse = searchMovie(title);
+      String jsonResponse = searchMovies(title);
 
       if (jsonResponse != null) {
         JSONObject moviesData = new JSONObject(new JSONTokener(jsonResponse));
@@ -53,19 +53,31 @@ public class IMDBMoviesServlet extends HttpServlet {
           JSONObject movieData = moviesArray.getJSONObject(i);
           Map<String, String> movieDetails = new HashMap<>();
           movieDetails.put("Title", movieData.optString("Title"));
-          movieDetails.put("Year", movieData.optString("Year"));
-          movieDetails.put("Genre", movieData.optString("Genre"));
-          movieDetails.put("imdbRating", movieData.optString("imdbRating"));
-          movieDetails.put("Poster", movieData.optString("Poster"));
           movieList.add(movieDetails);
         }
+
+        for (int j = 0; j < movieList.size(); j++) {
+          Map<String, String> eachMovieMap = movieList.get(j);
+          String movieTitle = eachMovieMap.get("Title");
+          String singleMovieData = searchMovie(movieTitle);
+          JSONObject singleMovieJSON = new JSONObject(new JSONTokener(singleMovieData));
+
+          eachMovieMap.put("Year", singleMovieJSON.optString("Year"));
+          eachMovieMap.put("Genre", singleMovieJSON.optString("Genre"));
+          eachMovieMap.put("imdbRating", singleMovieJSON.optString("imdbRating"));
+          eachMovieMap.put("Poster", singleMovieJSON.optString("Poster"));
+
+        }
+
+
+
         request.setAttribute("movieList", movieList);
       }
     }
     request.getRequestDispatcher("index.jsp").forward(request, response);
   }
 
-  private String searchMovie(String title) {
+  private String searchMovies(String title) {
     String apiUrlBuilder =
         String.format("http://www.omdbapi.com/?s=%s&apikey=%s", title.replace(" ", "+"), API_KEY);
 
@@ -82,6 +94,23 @@ public class IMDBMoviesServlet extends HttpServlet {
     }
     return null;
 
+  }
+
+  private String searchMovie(String title) {
+    String apiUrlBuilder =
+        String.format("http://www.omdbapi.com/?t=%s&apikey=%s", title.replace(" ", "+"), API_KEY);
+    try {
+      HttpClient client = HttpClient.newHttpClient();
+      HttpRequest request = HttpRequest.newBuilder().uri(new URI(apiUrlBuilder)).GET().build();
+      HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
+
+
+      return response.body();
+      // }
+    } catch (URISyntaxException | IOException | InterruptedException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
 
