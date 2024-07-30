@@ -14,15 +14,15 @@ body {
 	font-family: Roboto, sans-serif;
 	display: flex;
 	flex-direction: column;
-	align-items: center; /*  */
-	background: black;
+	align-items: center; 
+	background: #1b1c1b;
 	color: white;
 	display: flex;
 	max-height: 100vh;
 }
 
 .welcome {
-	font-size: 60px;
+	font-size: 50px;
 }
 
 .search {
