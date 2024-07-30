@@ -1,22 +1,93 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java"
+	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>First Java Web</title>
+<link
+	href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+	rel="stylesheet">
+
+<title>Movie Finder</title>
 <style>
+body {
+	font-family: Roboto, sans-serif;
+	display: flex;
+	flex-direction: column;
+	align-items: center; /*  */
+	background: black;
+	color: white;
+	display: flex;
+	max-height: 100vh;
+}
+
 .welcome {
-	font-size: 50px;
-	color: red;
-	border: 5px solid blue;
+	font-size: 60px;
+}
+
+.search {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	justify-content: center;
+	gap: 25px;
+	margin: 30px;
+	width: 100%;
+}
+
+.search>.search-input {
+	width: 50%;
+	padding: 15px;
+	font-size: 30px;
+	text-align: center;
+}
+
+.search>.search-submit {
+	background: #f53333;
+	color: white;
+	font-size: 25px;
+	padding: 15px;
+	width: 10%;
+	border: 1px solid white;
+	border-radius: 20%;
+	outline: none;
+}
+
+.search>.search-submit:hover {
+	background: #43cc21;
+	cursor: pointer;
+}
+
+.results {
+	margin-top: 20px;
 }
 </style>
 </head>
 <body>
-	<h1 class="welcome">Welcome to the first app!</h1>
-	<p>Two plus two is ${2+2}</p>
-	<a href="/login.jsp">Login </a>
+	<h1 class="welcome">A Movie Finder App</h1>
+	<br />
+
+
+	<form action="" method="get" class="search">
+		<input type="text" placeholder="Type name to search.."
+			class="search-input" /> <input type="submit"
+			value="Search" class="search-submit" />
+	</form>
+
+	<div class="results">
+		<%
+		if (true) {
+		%>
+		<p>Movies Found!</p>
+		<%
+		}
+		%>
+	</div>
+
+
+
+
 
 </body>
 </html>

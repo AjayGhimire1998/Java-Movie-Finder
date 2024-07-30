@@ -19,26 +19,10 @@ input {
 </head>
 <body>
 	<form method=class="form-g">
-		<input type="text" name="name" placeholder="Give name" /> &nbsp; <br />
-		<input type="password" name="password" placeholder="Give password" />
+		<input type="text" name="user_name" placeholder="Enter your user_name" /> &nbsp; <br />
 	</form>
 	<button>Submit</button>
-	<%
-	for (int i = 0; i < 10; i++) {
-	%>
-	<%
-	int val = i;
-	%>
-	<h2>Hello ${val}</h2>
-	<%
-	}
-	%>
 
-	<%-- <c:forEach var="i" begin="1" end="10">
-		<h1>
-			<c:out value="${i}" />
-		</h1>
-	</c:forEach> --%>
 
 </body>
 </html>
