@@ -22,7 +22,7 @@ public class IMDBMovieDAO {
   public static void main(String[] args)
       throws URISyntaxException, IOException, InterruptedException {
     String apiUrlBuilder =
-        String.format("http://www.omdbapi.com/?s=%s&apikey=%s", "batman", API_KEY);
+        String.format("http://www.omdbapi.com/?t=%s&apikey=%s", "batman", API_KEY);
 
     try {
       HttpClient client = HttpClient.newHttpClient();

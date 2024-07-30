@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import jakarta.servlet.ServletException;
@@ -44,33 +45,43 @@ public class IMDBMoviesServlet extends HttpServlet {
 
       if (jsonResponse != null) {
         JSONObject moviesData = new JSONObject(new JSONTokener(jsonResponse));
-        JSONArray moviesArray = moviesData.getJSONArray("Search");
+        JSONArray moviesArray;
+        try {
+          moviesArray = moviesData.getJSONArray("Search");
+          List<Map<String, String>> movieList = new ArrayList<>();
 
-        List<Map<String, String>> movieList = new ArrayList<>();
+          System.out.println(moviesData);
+          for (int i = 0; i < moviesArray.length(); i++) {
+            JSONObject movieData = moviesArray.getJSONObject(i);
 
-        System.out.println(moviesData);
-        for (int i = 0; i < moviesArray.length(); i++) {
-          JSONObject movieData = moviesArray.getJSONObject(i);
+            // movieDetails.put("Title", movieData.optString("Title"));
+            String movieTitle = movieData.optString("Title");
+            String singleMovieData = searchMovie(movieTitle);
+            JSONObject singleMovieJSON = new JSONObject(new JSONTokener(singleMovieData));
 
-          // movieDetails.put("Title", movieData.optString("Title"));
-          String movieTitle = movieData.optString("Title");
-          String singleMovieData = searchMovie(movieTitle);
-          JSONObject singleMovieJSON = new JSONObject(new JSONTokener(singleMovieData));
+            Map<String, String> movieDetails = new HashMap<>();
+            movieDetails.put("Title", singleMovieJSON.optString("Title"));
+            movieDetails.put("Plot", singleMovieJSON.optString("Plot"));
+            movieDetails.put("Year", singleMovieJSON.optString("Year"));
+            movieDetails.put("Genre", singleMovieJSON.optString("Genre"));
+            movieDetails.put("imdbRating", singleMovieJSON.optString("imdbRating"));
+            movieDetails.put("Poster", singleMovieJSON.optString("Poster"));
 
-          Map<String, String> movieDetails = new HashMap<>();
-          movieDetails.put("Title", singleMovieJSON.optString("Title"));
-          movieDetails.put("Year", singleMovieJSON.optString("Year"));
-          movieDetails.put("Genre", singleMovieJSON.optString("Genre"));
-          movieDetails.put("imdbRating", singleMovieJSON.optString("imdbRating"));
-          movieDetails.put("Poster", singleMovieJSON.optString("Poster"));
+            movieList.add(movieDetails);
+          }
 
-          movieList.add(movieDetails);
+
+          request.setAttribute("movieList", movieList);
+        } catch (JSONException e) {
+          // TODO Auto-generated catch block
+          request.setAttribute("error", moviesData);
         }
 
 
-        request.setAttribute("movieList", movieList);
+
       }
     }
+
     request.getRequestDispatcher("index.jsp").forward(request, response);
   }
 
