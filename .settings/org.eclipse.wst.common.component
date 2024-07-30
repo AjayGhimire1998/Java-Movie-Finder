@@ -11,7 +11,7 @@
                         
         
         <property name="java-output-path" value="/my-web-app/build/classes"/>
-        <property name="context-root" value="/imdbMovies"/>
+        <property name="context-root" value="/"/>
                     
     
     </wb-module>

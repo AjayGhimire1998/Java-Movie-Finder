@@ -52,9 +52,10 @@ public class IMDBMoviesServlet extends HttpServlet {
   private String searchMovie(String title) {
     String apiUrlBuilder =
         String.format("http://www.omdbapi.com/?t=%s&apikey=%s", title.replace(" ", "+"), API_KEY);
-    HttpClient client = HttpClient.newHttpClient();
+
     try {
-      HttpRequest request = HttpRequest.newBuilder(new URI(apiUrlBuilder)).build();
+      HttpClient client = HttpClient.newHttpClient();
+      HttpRequest request = HttpRequest.newBuilder().uri(new URI(apiUrlBuilder)).GET().build();
       HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
 
       if (response.statusCode() == 200) {
