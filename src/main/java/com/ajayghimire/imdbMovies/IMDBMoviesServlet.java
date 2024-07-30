@@ -22,7 +22,8 @@ import jakarta.servlet.http.HttpServletResponse;
  * Servlet implementation class IMDBMoviesServlet
  */
 public class IMDBMoviesServlet extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+
+  private static final long serialVersionUID = 907035272659756327L;
   private static final String API_KEY = "1f4503a2";
 
 
@@ -32,8 +33,8 @@ public class IMDBMoviesServlet extends HttpServlet {
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    System.out.println("Is being called?");
     String title = request.getParameter("title");
+    System.out.println(title);
     if (title != null && !title.trim().isEmpty()) {
       String jsonResponse = searchMovie(title);
       if (jsonResponse != null) {
@@ -43,6 +44,7 @@ public class IMDBMoviesServlet extends HttpServlet {
         movieDetails.put("Year", movieData.optString("Year"));
         movieDetails.put("Genre", movieData.optString("Genre"));
         movieDetails.put("imdbRating", movieData.optString("imdbRating"));
+        movieDetails.put("Poster", movieData.optString("Poster"));
         request.setAttribute("movieDetails", movieDetails);
       }
     }
@@ -58,9 +60,9 @@ public class IMDBMoviesServlet extends HttpServlet {
       HttpRequest request = HttpRequest.newBuilder().uri(new URI(apiUrlBuilder)).GET().build();
       HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
 
-      if (response.statusCode() == 200) {
-        return response.body();
-      }
+
+      return response.body();
+      // }
     } catch (URISyntaxException | IOException | InterruptedException e) {
       e.printStackTrace();
     }

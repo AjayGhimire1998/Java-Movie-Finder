@@ -66,23 +66,49 @@ body {
 </style>
 </head>
 <body>
+	
 	<h1 class="welcome">A Movie Finder App</h1>
 	<br />
-
-
-	<form action="/" method="get" class="search">
+	<form action="" method="get" class="search">
 		<input type="text" placeholder="Type name to search.."
-			class="search-input" id="title" name="title" /> <input
-			type="submit" value="Search" class="search-submit" />
+			class="search-input" id="title" name="title"
+			value="${param.title}" /> <input type="submit"
+			value="Search" class="search-submit" />
 	</form>
-
 	<div class="results">
 		<%
-		Object movieDetails = request.getAttribute("data");
+		Map<String, String> movieDetails = (Map<String, String>) request.getAttribute("movieDetails");
 		if (movieDetails != null) {
 		%>
-		<h1><%= movieDetails %></h1>
-		
+		<h2>Movie Details</h2>
+		<p>
+			Title:
+			<%=movieDetails.get("Title")%></p>
+		<p>
+			Year:
+			<%=movieDetails.get("Year")%></p>
+		<p>
+			Genre:
+			<%=movieDetails.get("Genre")%></p>
+		<p>
+			IMDb Rating:
+			<%=movieDetails.get("imdbRating")%></p>
+		<p>
+			<img src="<%=movieDetails.get("Poster")%>" alt="Poster" />
+		</p>
+		<form action="/" method="post">
+			<input type="hidden" name="title"
+				value="<%=movieDetails.get("Title")%>"> <input
+				type="hidden" name="year"
+				value="<%=movieDetails.get("Year")%>"> <input
+				type="hidden" name="genre"
+				value="<%=movieDetails.get("Genre")%>"> <input
+				type="hidden" name="imdbRating"
+				value="<%=movieDetails.get("imdbRating")%>"> <input
+				type="hidden" name="poster"
+				value="<%=movieDetails.get("Poster")%>"> <input
+				type="submit" value="Save to Database">
+		</form>
 		<%
 		} else {
 		%>
@@ -91,7 +117,6 @@ body {
 		}
 		%>
 	</div>
-
 
 
 
