@@ -173,7 +173,7 @@ body {
 </head>
 <body>
 
-	<h1 class="welcome">A Movie Finder App</h1>
+	<h1 class="welcome">Java Movie Finder App</h1>
 	<br />
 	<form action="/movies" method="get" class="search">
 		<input type="text" placeholder="Search title..."

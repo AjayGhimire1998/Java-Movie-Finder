@@ -141,7 +141,7 @@ body {
 </style>
 </head>
 <body>
-	<h1 class="welcome">A Movie Finder App</h1>
+	<h1 class="welcome">Java Movie Finder App</h1>
 	<br />
 	<input type="submit" value="⬅ ︎Go Back"
 		class="favourite-submit" onClick="history.back();" />
