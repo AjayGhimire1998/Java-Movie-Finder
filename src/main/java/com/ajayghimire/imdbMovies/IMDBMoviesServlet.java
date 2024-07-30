@@ -7,10 +7,13 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 
 
 /**
@@ -33,7 +36,9 @@ public class IMDBMoviesServlet extends HttpServlet {
     if (title != null && !title.trim().isEmpty()) {
       String jsonResponse = searchMovie(title);
       if (jsonResponse != null) {
-
+        JSONObject jsonData = new JSONObject(new JSONTokener(jsonResponse));
+        request.setAttribute("data", jsonData);
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
       }
     }
   }
