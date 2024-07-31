@@ -22,7 +22,7 @@ public class IMDBMovieDAO {
 
   public static List<Map<String, String>> getFavouriteMovies() {
     IMDBMovie imdbMovie = new IMDBMovie();
-    List<Map<String, String>> favouriteMovies = new ArrayList<>();
+    List<Map<String, String>> favouriteMovies = new ArrayList<Map<String, String>>();
 
     try (Connection connection = getConnection();
         Statement statement = connection.createStatement();
