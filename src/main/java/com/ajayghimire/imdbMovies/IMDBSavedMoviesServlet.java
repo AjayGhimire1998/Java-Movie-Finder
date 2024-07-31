@@ -14,20 +14,14 @@ import jakarta.servlet.http.HttpServletResponse;
 public class IMDBSavedMoviesServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  /**
-   * @see HttpServlet#HttpServlet()
-   */
-  public IMDBSavedMoviesServlet() {
-    super();
-    // TODO Auto-generated constructor stub
-  }
 
   /**
    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
    */
+  @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    String title = request.getParameter("title");
+
 
     List<Map<String, String>> favouriteMovies = IMDBMovieDAO.getFavouriteMovies();
     // imdbMovieDAO.getImdbMovie();

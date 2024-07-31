@@ -13,7 +13,8 @@ import java.util.Map;
 
 public class IMDBMovieDAO {
 
-  private static Connection getConnection() throws SQLException {
+  private static Connection getConnection() throws SQLException, ClassNotFoundException {
+    Class.forName("org.postgresql.Driver");
     return DriverManager.getConnection("jdbc:postgresql://localhost:5432/imdbMovies");
   }
 
@@ -35,7 +36,7 @@ public class IMDBMovieDAO {
         imdbMovie.setPoster(resultSet.getString("poster"));
         favouriteMovies.add(imdbMovie.toIMDBMovieMap());
       }
-    } catch (SQLException e) {
+    } catch (SQLException | ClassNotFoundException e) {
       System.err.println("Cannot establish connection to DB for getting favourite movies.");
       e.printStackTrace();
     }
@@ -55,7 +56,7 @@ public class IMDBMovieDAO {
           return resultSet.getInt(1) > 0;
         }
       }
-    } catch (SQLException e) {
+    } catch (SQLException | ClassNotFoundException e) {
       System.err.println("Cannot establish connection to DB for checking movie existence.");
       e.printStackTrace();
     }
@@ -88,7 +89,7 @@ public class IMDBMovieDAO {
         }
       }
 
-    } catch (SQLException e) {
+    } catch (SQLException | ClassNotFoundException e) {
       System.err.println("Cannot establish connection to DB for adding to favourite movies.");
       e.printStackTrace();
     }
@@ -110,7 +111,7 @@ public class IMDBMovieDAO {
         System.out.println("No movie found with the title: " + title);
       }
 
-    } catch (SQLException e) {
+    } catch (SQLException | ClassNotFoundException e) {
       System.err.println("Cannot establish connection to DB for deleting a favourite movie.");
       e.printStackTrace();
     }
