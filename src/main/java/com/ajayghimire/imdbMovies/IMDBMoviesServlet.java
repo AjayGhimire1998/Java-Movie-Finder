@@ -89,7 +89,7 @@ public class IMDBMoviesServlet extends HttpServlet {
     String title = req.getParameter("title");
     int year = Integer.parseInt(req.getParameter("year").replaceAll("\\D", "").substring(0, 4));
     String genre = req.getParameter("genre");
-    double rating = Double.parseDouble(req.getParameter("rating"));
+    double rating = Double.parseDouble(req.getParameter("rating").replaceAll("\\D", "0"));
     String plot = req.getParameter("plot");
     String poster = req.getParameter("poster");
 
