@@ -60,7 +60,7 @@ public class IMDBMovie {
   }
 
   public Map<String, String> toIMDBMovieMap() {
-    Map<String, String> movieMap = new HashMap<>();
+    Map<String, String> movieMap = new HashMap<String, String>();
     movieMap.put("title", this.title);
     movieMap.put("year", Integer.toString(this.year));
     movieMap.put("rating", Double.toString(this.rating));

@@ -58,7 +58,7 @@ public class IMDBMoviesServlet extends HttpServlet {
             String singleMovieData = searchMovie(movieTitle);
             JSONObject singleMovieJSON = new JSONObject(new JSONTokener(singleMovieData));
 
-            Map<String, String> movieDetails = new HashMap<>();
+            Map<String, String> movieDetails = new HashMap<String, String>();
             movieDetails.put("Title", singleMovieJSON.optString("Title"));
             movieDetails.put("Plot", singleMovieJSON.optString("Plot"));
             movieDetails.put("Year", singleMovieJSON.optString("Year"));
