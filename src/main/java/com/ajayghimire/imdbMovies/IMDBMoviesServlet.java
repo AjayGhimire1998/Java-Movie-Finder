@@ -29,9 +29,13 @@ import jakarta.servlet.http.HttpServletResponse;
 public class IMDBMoviesServlet extends HttpServlet {
 
 
+  static {
+
+  }
 
   private static final long serialVersionUID = 907035272659756327L;
-  private static final String API_KEY = Dotenv.load().get("OMDB_API_KEY");
+  private static Dotenv env = Dotenv.load();
+  private static String API_KEY = env.get("OMDB_API_KEY");
 
 
 
@@ -58,7 +62,7 @@ public class IMDBMoviesServlet extends HttpServlet {
             String singleMovieData = searchMovie(movieTitle);
             JSONObject singleMovieJSON = new JSONObject(new JSONTokener(singleMovieData));
 
-            Map<String, String> movieDetails = new HashMap<String, String>();
+            Map<String, String> movieDetails = new HashMap<>();
             movieDetails.put("Title", singleMovieJSON.optString("Title"));
             movieDetails.put("Plot", singleMovieJSON.optString("Plot"));
             movieDetails.put("Year", singleMovieJSON.optString("Year"));
@@ -108,6 +112,7 @@ public class IMDBMoviesServlet extends HttpServlet {
 
 
   private String searchMovies(String title) {
+
     String apiUrlBuilder =
         String.format("http://www.omdbapi.com/?s=%s&apikey=%s", title.replace(" ", "+"), API_KEY);
 

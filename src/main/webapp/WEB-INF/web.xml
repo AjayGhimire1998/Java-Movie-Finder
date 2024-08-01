@@ -5,8 +5,6 @@
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-    <description></description>
-    <display-name>ListMovie</display-name>
     <servlet-name>ListMovie</servlet-name>
     <servlet-class>com.ajayghimire.ListMovie</servlet-class>
   </servlet>
@@ -23,22 +21,11 @@
     <url-pattern>/movies</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description></description>
-    <display-name>IMDBSavedMoviesServlet</display-name>
     <servlet-name>IMDBSavedMoviesServlet</servlet-name>
     <servlet-class>com.ajayghimire.imdbMovies.IMDBSavedMoviesServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>IMDBSavedMoviesServlet</servlet-name>
     <url-pattern>/favourites</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>Faces Servlet</servlet-name>
-    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>/faces/*</url-pattern>
   </servlet-mapping>
 </web-app>
