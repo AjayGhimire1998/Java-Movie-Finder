@@ -1,0 +1,1 @@
+web: java jar my-web-app-0.0.1-SNAPSHOT.war
