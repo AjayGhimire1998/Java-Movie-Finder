@@ -1,4 +1,4 @@
 /build/
 /target/
-/my-web-app/src/main/resources/.env
+/src/main/resources/.env
 
