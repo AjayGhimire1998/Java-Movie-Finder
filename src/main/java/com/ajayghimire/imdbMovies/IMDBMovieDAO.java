@@ -10,19 +10,22 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class IMDBMovieDAO {
 
   private static Connection getConnection() throws SQLException, ClassNotFoundException {
     Class.forName("org.postgresql.Driver");
-    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/imdbMovies");
+    Dotenv dotenv = Dotenv.load();
+
+    return DriverManager.getConnection(dotenv.get("DB_URL"));
   }
 
 
 
   public static List<Map<String, String>> getFavouriteMovies() {
     IMDBMovie imdbMovie = new IMDBMovie();
-    List<Map<String, String>> favouriteMovies = new ArrayList<Map<String, String>>();
+    List<Map<String, String>> favouriteMovies = new ArrayList<>();
 
     try (Connection connection = getConnection();
         Statement statement = connection.createStatement();

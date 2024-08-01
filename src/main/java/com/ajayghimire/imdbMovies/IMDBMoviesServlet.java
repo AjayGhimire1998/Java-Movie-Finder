@@ -15,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,8 +28,10 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 public class IMDBMoviesServlet extends HttpServlet {
 
+
+
   private static final long serialVersionUID = 907035272659756327L;
-  private static final String API_KEY = "1f4503a2";
+  private static final String API_KEY = Dotenv.load().get("OMDB_API_KEY");
 
 
 
