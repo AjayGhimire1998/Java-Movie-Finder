@@ -25,8 +25,15 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.2.3</version>
 			</plugin>
+			<plugin>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
+				<version>3.0.7</version>
+			</plugin>
 		</plugins>
+
 	</build>
+
 
 	<dependencies>
 
@@ -47,7 +54,6 @@
 			<version>4.0.0</version>
 			<scope>provided</scope>
 		</dependency>
-		
 
 
 		<dependency>
